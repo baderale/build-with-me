@@ -1,0 +1,34 @@
+{
+  "name": "build-with-me",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": { "INSTALL_CLAUDE": "true" }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "lts" }
+  },
+  "remoteUser": "vscode",
+  "workspaceFolder": "/workspaces/build-with-me",
+
+  // Keeps your Claude Code login between rebuilds (reset.sh clears history, not the login).
+  "mounts": [
+    "source=build-with-me-claude,target=/home/vscode/.claude,type=volume"
+  ],
+  "postCreateCommand": "sudo chown -R vscode:vscode /home/vscode/.claude && bash scripts/check.sh",
+
+  "customizations": {
+    "vscode": {
+      // Recording-friendly: big text, no clutter. Only applies inside this container.
+      "settings": {
+        "editor.fontSize": 16,
+        "terminal.integrated.fontSize": 16,
+        "editor.minimap.enabled": false,
+        "workbench.startupEditor": "none",
+        "workbench.tips.enabled": false,
+        "breadcrumbs.enabled": false,
+        "terminal.integrated.cwd": "/workspaces/build-with-me/projects",
+        "git.openRepositoryInParentFolders": "never"
+      }
+    }
+  }
+}

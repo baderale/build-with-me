@@ -1,0 +1,10 @@
+# Everything built on camera stays local
+projects/*
+!projects/.gitkeep
+
+.DS_Store
+.env
+*.mp4
+*.mov
+*.wav
+*.mp3
